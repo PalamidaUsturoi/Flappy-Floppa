@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour {
     public PauseButton pauseButton;
     public ResumeButton resumeButton;
     public CallingMainMenu menu;
+    public static int MuteOrNot;
     // private bool gameOver;
 
     private void Start() {
@@ -24,6 +25,8 @@ public class Manager : MonoBehaviour {
         // gameOver = false;
         foreach (MovingPipe pipe in pipes)
             pipe.coordY = Random.Range(pipe.startY, pipe.endY);
+        GetComponent<AudioSource>().Play();
+
     }
 
     private void ShowMenu()
@@ -56,6 +59,14 @@ public class Manager : MonoBehaviour {
     private void Update() {
         if ( Input.GetKeyDown(KeyCode.Space) )
             player.Jump();
+        if( VolumeButton.volVal == 0)
+        {
+            GetComponent<AudioSource>().mute = true;
+        }
+        else
+        {
+            GetComponent<AudioSource>().mute = false;
+        }
     }
 
     private void GameOver() {

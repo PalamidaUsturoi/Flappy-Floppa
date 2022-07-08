@@ -6,6 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public Action<Collision2D> OnCollision;
     private Rigidbody2D rigidBody;
+    public Sprite Birb1;
+    public Sprite Birb2;
+    public Sprite Birb3;
+    public float count;
     public int speedUp = 5;
 
     private void Start() {
@@ -25,5 +29,26 @@ public class Player : MonoBehaviour {
         // Debug.Log(col.collider.name);
         if ( OnCollision != null )
             OnCollision.Invoke(col);
+    }
+    private void Update()
+    {
+        count += Time.deltaTime*6;
+        count %= 3;
+        if(count > 0 && count < 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Birb1;
+        }
+        else
+        {
+            if(count >= 1 && count <2)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = Birb2;
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = Birb3;
+            }
+        }
+
     }
 }
