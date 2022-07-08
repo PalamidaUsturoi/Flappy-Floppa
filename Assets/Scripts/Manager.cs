@@ -9,15 +9,33 @@ public class Manager : MonoBehaviour {
     public Moving floor;
     public Respawn respawn;
     private static int score;
+    public PauseButton pauseButton;
+    public ResumeButton resumeButton;
+    public CallingMainMenu menu;
     // private bool gameOver;
 
     private void Start() {
         score = 0;
         player.OnCollision = (Collision2D col) => PlayerCollision(col);
         respawn.OnCollision = (Collider2D col) => Respawn(col);
+        pauseButton.OnClick = ShowMenu;
+        resumeButton.OnClick = HideMenu;
+        menu.Hide();
         // gameOver = false;
         foreach (MovingPipe pipe in pipes)
             pipe.coordY = Random.Range(pipe.startY, pipe.endY);
+    }
+
+    private void ShowMenu()
+    {
+        menu.Show();
+        pauseButton.Hide();
+    }
+
+    private void HideMenu()
+    {
+        menu.Hide();
+        pauseButton.Show();
     }
 
     private void PlayerCollision(Collision2D col) {

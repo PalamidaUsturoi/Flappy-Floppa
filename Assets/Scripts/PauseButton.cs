@@ -13,4 +13,13 @@ public class PauseButton : MonoBehaviour
             OnClick.Invoke();
         }
     }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
 }
